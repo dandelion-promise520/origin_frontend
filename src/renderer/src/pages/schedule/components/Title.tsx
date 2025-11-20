@@ -1,10 +1,10 @@
-import { Button, Flex, Text } from '@radix-ui/themes'
+import { Button, Flex, Separator, Text, TextField } from '@radix-ui/themes'
 import React from 'react'
 
 const Title = (): React.JSX.Element => {
   return (
     // 父元素
-    <Flex direction="column" className="drag" px="4" py="6">
+    <Flex direction="column" className="drag" gap="6" px="4" py="6">
       {/* 上半部分 */}
       <Flex width="100%" justify="between">
         {/* 左侧部分 */}
@@ -12,10 +12,12 @@ const Title = (): React.JSX.Element => {
           <Text
             size="5"
             weight="bold"
-            className="flex justify-center items-center select-none no-drag border-gray-4 border-r-3 pr-4"
+            className="flex justify-center items-center select-none no-drag "
           >
             Rent Order
           </Text>
+
+          <Separator mx="2" size="4" orientation="vertical" />
 
           <Flex gap="2">
             <Button
@@ -24,7 +26,7 @@ const Title = (): React.JSX.Element => {
               color="gray"
               radius="large"
               size="3"
-              variant="solid"
+              variant="classic"
               highContrast
             >
               <span className="icon-[mdi--plus] size-6" />
@@ -76,7 +78,19 @@ const Title = (): React.JSX.Element => {
       </Flex>
 
       {/* 下半部分 */}
-      <Flex width="100%"></Flex>
+      <Flex width="100%" className="no-drag">
+        <TextField.Root
+          className="w-100"
+          variant="classic"
+          radius="full"
+          color="gray"
+          placeholder="Search order,product,customer"
+        >
+          <TextField.Slot>
+            <span className="icon-[mingcute--search-line]" />
+          </TextField.Slot>
+        </TextField.Root>
+      </Flex>
     </Flex>
   )
 }
