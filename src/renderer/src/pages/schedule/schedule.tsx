@@ -1,117 +1,135 @@
 import { Avatar, Flex, Progress, Separator } from '@radix-ui/themes'
 import React from 'react'
 import Title from './components/Title'
+import { color, Color, dataInter } from './types'
 
 const Schedule = (): React.JSX.Element => {
-  interface dataInter {
-    id: string
-    status: 'Draft' | 'Active' | 'Over Time'
-    machine: string
-    startTime: string
-    endTime: string
-    avatar: string
-    name: string
-    device: 'Website' | 'In-store'
-  }
-
+  // 卡片数据信息
   const data: dataInter[] = [
     {
-      id: '#92',
+      id: 92,
       status: 'Draft',
       machine: 'Fujifilm XT20(2x); Tripod Xtramax(3x); 50mm Leica Lens (1x)',
-      startTime: '3 Nov,2:00pm',
-      endTime: '9 Nov,2:00pm',
+      startTime: '2024-11-03T06:00:00.000Z',
+      endTime: '2026-11-09T06:00:00.000Z',
       avatar: 'https://***',
       name: 'Darrell Steward',
       device: 'Website'
     },
     {
-      id: '#100',
+      id: 10,
       status: 'Over Time',
       machine: 'Canon 600D (1x)',
-      startTime: '27 Oct, 9:00am',
-      endTime: '31 Oct, 9:00am',
+      startTime: '2024-10-27T01:00:00.000Z',
+      endTime: '2025-10-31T01:00:00.000Z',
       avatar: 'https://***',
       name: 'Darlene Fox',
       device: 'Website'
     },
     {
-      id: '#95',
+      id: 95,
       status: 'Active',
       machine: 'DJl Mavic 3 (1x); Go Pro Hero 5(1x); Battery pack (1x)',
-      startTime: '26 Oct, 9:00am',
-      endTime: '2 Nov,12:00pm',
+      startTime: '2024-10-26T01:00:00.000Z',
+      endTime: '2026-11-02T04:00:00.000Z',
       avatar: 'https://***',
       name: 'Floyd Miles',
       device: 'In-store'
     },
     {
-      id: '#94',
+      id: 94,
       status: 'Active',
       machine: 'Fujifilm 35mm Lens (2x)',
-      startTime: '30 Oct, 9:00am',
-      endTime: '4 Nov,9:00pm',
+      startTime: '2024-10-30T01:00:00.000Z',
+      endTime: '2026-11-04T13:00:00.000Z',
       avatar: 'https://***',
       name: 'Munawir Efendi',
       device: 'In-store'
     },
     {
-      id: '#98',
+      id: 98,
       status: 'Active',
       machine: 'Go Pro Hero 5 (1x)',
-      startTime: '29 Oct, 7:00am',
-      endTime: '5 Nov,7:00pm',
+      startTime: '2024-10-28T23:00:00.000Z',
+      endTime: '2026-11-05T11:00:00.000Z',
       avatar: 'https://***',
       name: 'Courtney Henry',
       device: 'Website'
     },
     {
-      id: '#97',
+      id: 97,
       status: 'Active',
       machine: 'Go Pro Hero 5 (1x);0mm Fuji Lens(1x)',
-      startTime: '1 Nov,9:00pm',
-      endTime: '7 Nov,9:00am',
+      startTime: '2024-11-01T13:00:00.000Z',
+      endTime: '2026-11-07T01:00:00.000Z',
       avatar: 'https://***',
       name: 'Mario San',
       device: 'Website'
     }
   ]
 
-  const color = [
-    'ruby',
-    'gray',
-    'gold',
-    'bronze',
-    'brown',
-    'yellow',
-    'amber',
-    'orange',
-    'tomato',
-    'red',
-    'crimson',
-    'pink',
-    'plum',
-    'purple',
-    'violet',
-    'iris',
-    'indigo',
-    'blue',
-    'cyan',
-    'teal',
-    'jade',
-    'green',
-    'grass',
-    'lime',
-    'mint',
-    'sky',
-    undefined
-  ] as const
-  type Color = (typeof color)[number]
-
+  // 随机头像颜色
   function getRandomColor(): Color {
     return color[Math.floor(Math.random() * color.length)]
   }
 
+  // 转换时间
+  function getTime(isoString: string): string {
+    const date = new Date(isoString)
+
+    if (isNaN(date.getTime())) {
+      throw new Error('缺少ISO时间字段')
+    }
+
+    // 获取日期部分
+    const day = date.getDate()
+    const month = date.toLocaleString('en', { month: 'short' })
+
+    // 获取时间部分（12小时制）
+    let hours = date.getHours()
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+    const period = hours >= 12 ? 'pm' : 'am'
+
+    // 转成12小时值
+    hours = hours % 12 || 12
+
+    return `${day} ${month}, ${hours}:${minutes}${period}`
+  }
+
+  // 算出当前所剩时间余额(结束时间减去开始时间)返回一个0-100的值作为进度条
+  function getRemaining(startTime: string, endTime: string): number {
+    const start = new Date(startTime).getTime()
+    const end = new Date(endTime).getTime()
+    const now = Date.now()
+
+    // 验证时间有效性
+    if (isNaN(start) || isNaN(end)) {
+      throw new Error('输入时间无效')
+    }
+
+    if (start >= end) {
+      throw new Error('开始时间必须早于结束时间')
+    }
+    // 如果当前时间早于开始时间，返回0%
+    if (now < start) {
+      return 0
+    }
+
+    // 如果当前时间晚于结束时间，返回100%
+    if (now > end) {
+      return 100
+    }
+
+    // 计算进度百分比
+    const totalDuration = end - start
+    const elapsed = now - start
+    const progress = (elapsed / totalDuration) * 100
+
+    // 返回0-100之间的值，保留两位小数
+    return Math.min(100, Math.max(0, Number(progress.toFixed(2))))
+  }
+
+  //内容部分
   function Main(): React.JSX.Element {
     return (
       <Flex
@@ -128,7 +146,7 @@ const Schedule = (): React.JSX.Element => {
             >
               {/* id部分 */}
               <div className="flex gap-1 items-center">
-                <span className="text-gray-10 font-bold text-xl">{item.id}</span>
+                <span className="text-gray-10 font-bold text-xl">#{item.id}</span>
                 <Separator mx="2" size="1" orientation="vertical" />
                 <span
                   className={`text-2xl ${item.status === 'Draft' ? 'icon-[material-symbols--draft] text-gray-10' : item.status === 'Active' ? 'icon-[basil--lightning-alt-solid] text-blue-400' : 'icon-[majesticons--exclamation] text-red-400'}`}
@@ -144,11 +162,17 @@ const Schedule = (): React.JSX.Element => {
               <div className="flex flex-col gap-3 mt-auto">
                 {/* 文字部分 */}
                 <div className="flex justify-between text-gray-10 text-sm">
-                  <span>{item.startTime}</span>
-                  <span>{item.endTime}</span>
+                  <span>{getTime(item.startTime)}</span>
+                  <span>{getTime(item.endTime)}</span>
                 </div>
                 {/* 进度条 */}
-                <Progress value={25} size="1" />
+                <Progress
+                  value={getRemaining(item.startTime, item.endTime)}
+                  color={getRemaining(item.startTime, item.endTime) === 100 ? 'red' : 'gray'}
+                  highContrast={getRemaining(item.startTime, item.endTime) === 100 ? false : true}
+                  className='after:content-[""]'
+                  size="1"
+                />
               </div>
 
               {/* 个人信息部分 */}
