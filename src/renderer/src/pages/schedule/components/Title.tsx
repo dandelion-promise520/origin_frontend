@@ -153,7 +153,7 @@ const OrderStatus = (): React.JSX.Element => {
 const Title = (): React.JSX.Element => {
   return (
     // 父元素
-    <Flex direction="column" position="sticky" top="0" className="drag z-100" gap="6" px="4" py="6">
+    <Flex direction="column" className="drag z-100" gap="6" px="4" py="6">
       {/* 上半部分 */}
       <Flex width="100%" justify="between">
         {/* 左侧部分 */}

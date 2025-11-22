@@ -112,11 +112,15 @@ const Schedule = (): React.JSX.Element => {
     return color[Math.floor(Math.random() * color.length)]
   }
 
-  return (
-    <Flex direction="column" height="100%" width="100%">
-      <Title />
-      <Flex p="4" justify="center" align="center">
-        <div className="grid gap-6 grid-cols-3 ">
+  function Main(): React.JSX.Element {
+    return (
+      <Flex
+        p="4"
+        justify="center"
+        align="start"
+        style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}
+      >
+        <div className="grid gap-6 grid-cols-3 w-full">
           {data.map((item) => (
             <div
               key={item.id}
@@ -183,6 +187,13 @@ const Schedule = (): React.JSX.Element => {
           ))}
         </div>
       </Flex>
+    )
+  }
+
+  return (
+    <Flex direction="column" height="100%" width="100%">
+      <Title />
+      <Main />
     </Flex>
   )
 }

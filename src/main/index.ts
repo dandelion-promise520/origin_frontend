@@ -7,9 +7,9 @@ function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1060,
-    height: 700,
+    height: 800,
     minWidth: 1060,
-    minHeight: 700,
+    minHeight: 600,
     show: false,
     autoHideMenuBar: true,
     titleBarStyle: 'hidden',
