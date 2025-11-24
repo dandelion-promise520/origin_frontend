@@ -12,12 +12,28 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: origin
+  executableName:
+    origin
+    # 关键配置：允许用户选择安装目录
+  target:
+    - target: nsis
+      arch:
+        - x64
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
+  # 启用安装目录选择
+  allowToChangeInstallationDirectory: true
+  # 以下为可选优化配置
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  # 自定义安装界面语言（可选）
+  installerLanguages:
+    - en
+    - zh_CN
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:

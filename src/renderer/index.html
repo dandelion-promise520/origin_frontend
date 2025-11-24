@@ -5,14 +5,13 @@
   <meta charset="UTF-8" />
   <title>Electron</title>
   <!-- 安全策略，生产环境请打开 -->
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <!-- <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" /> -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" />
 
   <!-- 暂时关闭策略以使用code-inspector,开发环境下使用 -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: http://localhost:5678;
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: http://localhost:5678;
                    connect-src 'self' http://localhost:5678 ws:;
-                   img-src 'self' data: http://localhost:5678;" />
+                   img-src 'self' data: http://localhost:5678;" /> -->
 </head>
 
 <body>

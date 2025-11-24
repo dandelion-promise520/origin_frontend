@@ -20,13 +20,13 @@ const Menu = (): React.JSX.Element => {
           gap="4"
           className="after:bg-gray-4 after:h-0.5 after:w-8 after:rounded-xl after:content-['']"
         >
-          <NavLink to="/">
+          <NavLink to="home">
             <span className="icon-[fa7-solid--home] size-6" />
           </NavLink>
         </Flex>
 
         <Flex direction="column" gap="4">
-          <NavLink to="schedule">
+          <NavLink to="/">
             <span className="icon-[mingcute--schedule-fill] size-7" />
           </NavLink>
           <NavLink to="members">

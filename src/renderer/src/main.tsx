@@ -3,21 +3,21 @@ import './assets/main.css'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { createHashRouter, RouterProvider } from 'react-router'
 import App from './App'
-import { Theme, ThemePanel } from '@radix-ui/themes'
+import { Theme } from '@radix-ui/themes'
 import home from './pages/home/home'
 import schedule from './pages/schedule/schedule'
 import members from './pages/members/members'
 import dashboard from './pages/dashboard/dashboard'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     Component: App,
     children: [
-      { index: true, Component: home },
-      { path: 'schedule', Component: schedule },
+      { path: 'home', Component: home },
+      { index: true, Component: schedule },
       { path: 'members', Component: members },
       { path: 'dashboard', Component: dashboard }
     ]
@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Theme>
       <RouterProvider router={router} />
-      <ThemePanel />
+      {/* <ThemePanel /> */}
     </Theme>
   </StrictMode>
 )
