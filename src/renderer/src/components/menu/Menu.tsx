@@ -18,10 +18,10 @@ const Menu = (): React.JSX.Element => {
           justify="center"
           align="center"
           gap="4"
-          className="after:content-[''] after:w-8 after:h-0.5 after:rounded-xl after:bg-gray-4"
+          className="after:bg-gray-4 after:h-0.5 after:w-8 after:rounded-xl after:content-['']"
         >
           <NavLink to="/">
-            <span className="icon-[fa7-solid--home] size-6  " />
+            <span className="icon-[fa7-solid--home] size-6" />
           </NavLink>
         </Flex>
 
@@ -30,22 +30,22 @@ const Menu = (): React.JSX.Element => {
             <span className="icon-[mingcute--schedule-fill] size-7" />
           </NavLink>
           <NavLink to="members">
-            <span className="icon-[tdesign--member-filled] size-6 " />
+            <span className="icon-[tdesign--member-filled] size-6" />
           </NavLink>
           <NavLink to="dashboard">
-            <span className="icon-[streamline-ultimate--presentation-board-graph-bold] size-6 " />
+            <span className="icon-[streamline-ultimate--presentation-board-graph-bold] size-6" />
           </NavLink>
         </Flex>
       </Flex>
 
       <section
         style={{ writingMode: 'vertical-rl' }}
-        className="text-xl text-black font-bold select-none"
+        className="text-xl font-bold text-black select-none"
       >
         rentabel
       </section>
 
-      <section className="icon-[tabler--message] size-10 no-drag cursor-pointer" />
+      <section className="icon-[tabler--message] no-drag size-10 cursor-pointer" />
     </Flex>
   )
 }

@@ -161,7 +161,7 @@ const Title = (): React.JSX.Element => {
           <Text
             size="5"
             weight="bold"
-            className="flex justify-center items-center select-none no-drag "
+            className="no-drag flex items-center justify-center select-none"
           >
             Rent Order
           </Text>

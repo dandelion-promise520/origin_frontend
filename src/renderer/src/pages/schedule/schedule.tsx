@@ -138,20 +138,20 @@ const Schedule = (): React.JSX.Element => {
         align="start"
         style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}
       >
-        <div className="grid gap-6 grid-cols-3 w-full">
+        <div className="grid w-full grid-cols-3 gap-6">
           {data.map((item) => (
             <div
               key={item.id}
-              className={`relative flex flex-col  border-2 border-gray-4 rounded-md rounded-b-2xl p-4 pb-6 gap-4 ${item.status === 'Draft' ? 'bg-gray-3' : item.status === 'Active' ? '' : 'bg-red-50 border-red-200'} `}
+              className={`border-gray-4 relative flex flex-col gap-4 rounded-md rounded-b-2xl border-2 p-4 pb-6 ${item.status === 'Draft' ? 'bg-gray-3' : item.status === 'Active' ? '' : 'border-red-200 bg-red-50'} `}
             >
               {/* id部分 */}
-              <div className="flex gap-1 items-center">
-                <span className="text-gray-10 font-bold text-xl">#{item.id}</span>
+              <div className="flex items-center gap-1">
+                <span className="text-gray-10 text-xl font-bold">#{item.id}</span>
                 <Separator mx="2" size="1" orientation="vertical" />
                 <span
                   className={`text-2xl ${item.status === 'Draft' ? 'icon-[material-symbols--draft] text-gray-10' : item.status === 'Active' ? 'icon-[basil--lightning-alt-solid] text-blue-400' : 'icon-[majesticons--exclamation] text-red-400'}`}
                 />
-                <span className="text-gray-10 font-medium text-md">{item.status}</span>
+                <span className="text-gray-10 text-md font-medium">{item.status}</span>
               </div>
               {/* 名称部分 */}
               <span className={`${item.status === 'Draft' ? 'text-gray-10' : ''}`}>
@@ -159,9 +159,9 @@ const Schedule = (): React.JSX.Element => {
               </span>
 
               {/* 时间部分 */}
-              <div className="flex flex-col gap-3 mt-auto">
+              <div className="mt-auto flex flex-col gap-3">
                 {/* 文字部分 */}
-                <div className="flex justify-between text-gray-10 text-sm">
+                <div className="text-gray-10 flex justify-between text-sm">
                   <span>{getTime(item.startTime)}</span>
                   <span>{getTime(item.endTime)}</span>
                 </div>
@@ -176,9 +176,9 @@ const Schedule = (): React.JSX.Element => {
               </div>
 
               {/* 个人信息部分 */}
-              <div className="flex justify-between items-center mt-10">
+              <div className="mt-10 flex items-center justify-between">
                 {/* 信息部分 */}
-                <div className="flex justify-center items-center gap-4">
+                <div className="flex items-center justify-center gap-4">
                   <Avatar
                     radius="full"
                     size="2"
@@ -198,14 +198,14 @@ const Schedule = (): React.JSX.Element => {
                 </div>
                 {/* 按钮部分 */}
                 <div>
-                  <div className="bg-black size-8 flex justify-center items-center rounded-full cursor-pointer">
+                  <div className="flex size-8 cursor-pointer items-center justify-center rounded-full bg-black">
                     <span className="icon-[material-symbols--arrow-forward-ios] text-white" />
                   </div>
                 </div>
               </div>
               {/* 底部条 */}
               <div
-                className={`${item.status === 'Draft' ? 'bg-[#a5a6b1]' : item.status === 'Active' ? 'bg-[#14bcf1]' : 'bg-[#fa4561]'}  absolute left-0 bottom-0 h-2 rounded-b-2xl w-full`}
+                className={`${item.status === 'Draft' ? 'bg-[#a5a6b1]' : item.status === 'Active' ? 'bg-[#14bcf1]' : 'bg-[#fa4561]'} absolute bottom-0 left-0 h-2 w-full rounded-b-2xl`}
               ></div>
             </div>
           ))}

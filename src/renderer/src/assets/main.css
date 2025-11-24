@@ -1,7 +1,7 @@
 @import './base.css';
 @import 'tailwindcss';
 @import 'tailwindcss-radix-colors/dist/gray.css';
-@plugin "@iconify/tailwind4";
+@plugin '@iconify/tailwind4';
 
 .drag {
   app-region: drag;

@@ -10,7 +10,7 @@ const App = (): React.JSX.Element => {
         align="center"
         height="100%"
         p="4"
-        className="border-r-2 border-gray-4 drag"
+        className="border-gray-4 drag border-r-2"
       >
         <Menu />
       </Flex>
