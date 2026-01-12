@@ -30,6 +30,8 @@
     "cspell.json",
     "commitlint.config.js",
     "biome.json",
-    ".cspell"
+    ".cspell",
+    ".oxlintrc.json",
+    ".oxfmtrc.json"
   ]
 }

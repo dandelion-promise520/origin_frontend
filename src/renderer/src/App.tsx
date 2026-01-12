@@ -1,17 +1,8 @@
 import { Outlet } from 'react-router'
-import Menu from './components/menu/Menu'
+import Menu from './components/Menu'
 import { Flex } from '@radix-ui/themes'
-// import { useEffect } from 'react'
-// import { getProduct } from './api/product'
 
-const App = (): React.JSX.Element => {
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const res = await getProduct()
-  //     console.log(res)
-  //   })()
-  // })
-
+const App: React.FC = () => {
   return (
     <Flex justify="between" position="relative" overflow="hidden" height="100dvh">
       <Flex

@@ -1,8 +1,9 @@
 import { Flex } from '@radix-ui/themes'
+import React from 'react'
 
 import { NavLink } from 'react-router'
 
-const Menu = (): React.JSX.Element => {
+const Menu: React.FC = () => {
   return (
     <Flex justify="between" align="center" direction="column" height="100%">
       <Flex
@@ -20,13 +21,13 @@ const Menu = (): React.JSX.Element => {
           gap="4"
           className="after:bg-gray-4 after:h-0.5 after:w-8 after:rounded-xl after:content-['']"
         >
-          <NavLink to="home">
+          <NavLink to="/">
             <span className="icon-[fa7-solid--home] size-6" />
           </NavLink>
         </Flex>
 
         <Flex direction="column" gap="4">
-          <NavLink to="/">
+          <NavLink to="schedule">
             <span className="icon-[mingcute--schedule-fill] size-7" />
           </NavLink>
           <NavLink to="members">

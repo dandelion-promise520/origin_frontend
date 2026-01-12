@@ -1,6 +1,6 @@
 import { instance } from '../request'
 
-interface Product {
+export interface Product {
   id: number
   barcode: string
   category: string
@@ -12,6 +12,6 @@ interface Product {
   updated_at: string
 }
 
-export const getProduct = (): Promise<Product[]> => {
-  return instance.get('/product')
+export const getProduct = (params?: string): Promise<Product[]> => {
+  return instance.get(params ? `/product?${params}` : `/product`)
 }

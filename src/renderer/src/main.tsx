@@ -16,8 +16,8 @@ const router = createHashRouter([
     path: '/',
     Component: App,
     children: [
-      { path: 'home', Component: home },
-      { index: true, Component: schedule },
+      { index: true, Component: home },
+      { path: 'schedule', Component: schedule },
       { path: 'members', Component: members },
       { path: 'dashboard', Component: dashboard }
     ]

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const dashboard = (): React.JSX.Element => {
+const dashboard: React.FC = () => {
   return <div>dashboard</div>
 }
 

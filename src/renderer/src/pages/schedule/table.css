@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+@layer components {
+  .table-with-divider th:not(:last-child),
+  .table-with-divider td:not(:last-child) {
+    @apply border-r border-slate-200;
+  }
+
+  .table-striped tbody tr:nth-child(even) {
+    @apply bg-[#f9f9fb];
+  }
+
+  .table-striped tbody tr:hover {
+    @apply bg-[#f9f9fb];
+  }
+}

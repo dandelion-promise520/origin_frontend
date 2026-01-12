@@ -1,6 +1,6 @@
 import React from 'react'
 
-const members = (): React.JSX.Element => {
+const members: React.FC = () => {
   return <div>members</div>
 }
 

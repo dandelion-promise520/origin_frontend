@@ -2,15 +2,17 @@
   "name": "origin",
   "version": "1.0.0",
   "description": "An Electron application with React and TypeScript",
-  "main": "./out/main/index.js",
+  "homepage": "https://electron-vite.org",
   "author": "example.com",
   "type": "module",
-  "homepage": "https://electron-vite.org",
+  "main": "./out/main/index.js",
   "scripts": {
-    "format": "prettier --write .",
-    "lint": "eslint --cache .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "spellcheck": "cspell src/**/*.*",
-    "check": "pnpm format && pnpm lint && pnpm spellcheck",
+    "check": "pnpm format && pnpm lint:fix && pnpm spellcheck",
     "commit": "git-cz",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
@@ -24,12 +26,6 @@
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux",
     "prepare": "husky"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-git",
-      "useEmoji": true
-    }
   },
   "dependencies": {
     "@commitlint/config-conventional": "^20.3.1",
@@ -57,17 +53,19 @@
     "electron": "^38.1.2",
     "electron-builder": "^25.1.8",
     "electron-vite": "^4.0.1",
-    "eslint": "^9.36.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
     "husky": "^9.1.7",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.7.1",
+    "oxfmt": "^0.24.0",
+    "oxlint": "^1.39.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-git",
+      "useEmoji": true
+    }
   },
   "pnpm": {
     "onlyBuiltDependencies": [
