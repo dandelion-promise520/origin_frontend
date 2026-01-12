@@ -1,4 +1,5 @@
 cardvalue
+commitlint
 crdt
 CRDT
 Efendi
