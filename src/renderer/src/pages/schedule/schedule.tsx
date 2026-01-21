@@ -1,66 +1,63 @@
-import { Flex, Table } from '@radix-ui/themes'
 import { getProduct } from '@renderer/api/product'
 import React, { useEffect, useState } from 'react'
-import './table.css'
 import Title from '@renderer/components/Title'
 import { Product } from '@renderer/types'
+import { Table } from 'antd'
 
 const Schedule: React.FC = () => {
-  const [rows, setRows] = useState<Product[]>([])
+  const [dataSource, setDataSource] = useState<Product[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     ;(async () => {
       const res = await getProduct()
-      setRows(res.data)
+      setLoading(false)
+      setDataSource(res.data)
     })()
   }, [])
 
-  const Main: React.FC = () => {
-    return (
-      <Flex
-        p="4"
-        justify="center"
-        align="start"
-        style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}
-      >
-        <Table.Root variant="surface" className="table-with-divider table-striped w-full">
-          <Table.Header>
-            <Table.Row>
-              <Table.ColumnHeaderCell>名称</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell>单位</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell>存储位置</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell>保质期</Table.ColumnHeaderCell>
-              <Table.ColumnHeaderCell>条码信息</Table.ColumnHeaderCell>
-            </Table.Row>
-          </Table.Header>
-
-          <Table.Body>
-            {rows.length !== 0 ? (
-              rows.map((row, index) => (
-                <Table.Row key={index}>
-                  <Table.RowHeaderCell>{row.product_name}</Table.RowHeaderCell>
-                  <Table.Cell>{row.unit}</Table.Cell>
-                  <Table.Cell>{row.location}</Table.Cell>
-                  <Table.Cell>{row.shelf_life_days}</Table.Cell>
-                  <Table.Cell>{row.barcode}</Table.Cell>
-                </Table.Row>
-              ))
-            ) : (
-              <Table.Row>
-                <Table.Cell justify="center">暂无数据</Table.Cell>
-              </Table.Row>
-            )}
-          </Table.Body>
-        </Table.Root>
-      </Flex>
-    )
-  }
+  const columns = [
+    {
+      title: '名称',
+      dataIndex: 'product_name',
+      key: 'product_name'
+    },
+    {
+      title: '	单位',
+      dataIndex: 'unit',
+      key: 'unit'
+    },
+    {
+      title: '存储位置',
+      dataIndex: 'location',
+      key: 'location'
+    },
+    {
+      title: '保质期',
+      dataIndex: 'shelf_life_days',
+      key: 'shelf_life_days'
+    },
+    {
+      title: '条码信息',
+      dataIndex: 'barcode',
+      key: 'barcode'
+    }
+  ]
 
   return (
-    <Flex direction={'column'} height="100%" width="100%">
-      <Title setTableValue={setRows} />
-      <Main />
-    </Flex>
+    <div className="flex h-full w-full flex-col">
+      <Title setTableValue={setDataSource} />
+      {/* 内容部分 */}
+      <div className="p-4">
+        <Table
+          bordered
+          pagination={false}
+          loading={loading}
+          dataSource={dataSource}
+          columns={columns}
+        ></Table>
+      </div>
+    </div>
   )
 }
 

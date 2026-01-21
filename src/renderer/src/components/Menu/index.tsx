@@ -36,7 +36,7 @@ const Menu: React.FC = () => {
         rentabel
       </main>
 
-      <footer className="icon-[tabler--message] no-drag size-10 cursor-pointer" />
+      <footer className="icon-[tabler--message] no-drag size-10 cursor-pointer text-black" />
     </div>
   )
 }

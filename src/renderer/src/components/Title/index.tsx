@@ -1,4 +1,3 @@
-// import { Text } from '@radix-ui/themes'
 import { getProduct } from '@renderer/api/product'
 import { Product } from '@renderer/types'
 import { Button, ConfigProvider, Input, Radio } from 'antd'
@@ -37,7 +36,7 @@ const Title: React.FC<{
       <header className="flex w-full justify-between">
         {/* 左侧部分 */}
         <section className="center gap-4">
-          <span className="flex items-center justify-center text-xl font-bold select-none">
+          <span className="flex items-center justify-center text-xl font-bold text-black select-none">
             Rent Order
           </span>
 

@@ -11,7 +11,7 @@ const Home: React.FC = () => {
       status: 'Draft',
       machine: 'Fujifilm XT20(2x); Tripod Xtramax(3x); 50mm Leica Lens (1x)',
       startTime: '2024-11-03T06:00:00.000Z',
-      endTime: '2026-11-09T06:00:00.000Z',
+      endTime: '2030-11-09T06:00:00.000Z',
       avatar: 'https://***',
       name: 'Darrell Steward',
       device: 'Website'
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
       status: 'Over Time',
       machine: 'Canon 600D (1x)',
       startTime: '2024-10-27T01:00:00.000Z',
-      endTime: '2025-10-31T01:00:00.000Z',
+      endTime: '2029-10-31T01:00:00.000Z',
       avatar: 'https://***',
       name: 'Darlene Fox',
       device: 'Website'
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       status: 'Active',
       machine: 'DJl Mavic 3 (1x); Go Pro Hero 5(1x); Battery pack (1x)',
       startTime: '2024-10-26T01:00:00.000Z',
-      endTime: '2026-11-02T04:00:00.000Z',
+      endTime: '2028-11-02T04:00:00.000Z',
       avatar: 'https://***',
       name: 'Floyd Miles',
       device: 'In-store'
@@ -41,7 +41,7 @@ const Home: React.FC = () => {
       status: 'Active',
       machine: 'Fujifilm 35mm Lens (2x)',
       startTime: '2024-10-30T01:00:00.000Z',
-      endTime: '2026-11-04T13:00:00.000Z',
+      endTime: '2027-11-04T13:00:00.000Z',
       avatar: 'https://***',
       name: 'Munawir Efendi',
       device: 'In-store'
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
       status: 'Active',
       machine: 'Go Pro Hero 5 (1x);0mm Fuji Lens(1x)',
       startTime: '2024-11-01T13:00:00.000Z',
-      endTime: '2026-11-07T01:00:00.000Z',
+      endTime: '2025-11-07T01:00:00.000Z',
       avatar: 'https://***',
       name: 'Mario San',
       device: 'Website'
@@ -132,22 +132,19 @@ const Home: React.FC = () => {
   }
 
   // 进度条
-  const classNames: ProgressProps['classNames'] = {
-    root: 'demo-progress-root',
-    rail: 'demo-progress-rail',
-    track: 'demo-progress-track'
-  }
-
   const stylesFn: ProgressProps['styles'] = (info) => {
     const percent = info?.props?.percent ?? 0
-    const hue = 200 - (200 * percent) / 100
+
+    // 计算渐变色的 hue 值
+    const hue = 120 - (percent / 100) * 120 // 从绿色（120）到黄色（60），再到红色（0）
+
     return {
       track: {
         backgroundImage: `
         linear-gradient(
           to right,
           hsla(${hue}, 85%, 65%, 1),
-          hsla(${hue + 30}, 90%, 55%, 0.95)
+          hsla(${hue - 20}, 90%, 55%, 0.95)
         )`,
         borderRadius: 8,
         transition: 'all 0.3s ease'
@@ -183,7 +180,7 @@ const Home: React.FC = () => {
                 <span className="text-md font-medium text-gray-500">{item.status}</span>
               </section>
               {/* 名称部分 */}
-              <section className={`${item.status === 'Draft' ? 'text-gray-500' : ''}`}>
+              <section className={`${item.status === 'Draft' ? 'text-gray-500' : 'text-black'}`}>
                 {item.machine};
               </section>
 
@@ -197,7 +194,6 @@ const Home: React.FC = () => {
                 </div>
                 {/* 进度条 */}
                 <Progress
-                  classNames={classNames}
                   styles={stylesFn}
                   percent={getRemaining(item.startTime, item.endTime)}
                   format={() => ''}
@@ -215,10 +211,10 @@ const Home: React.FC = () => {
                       .join('')}
                   </Avatar>
                   <div className="flex flex-col">
-                    <span className="font-bold">{item.name}</span>
+                    <span className="font-bold text-black">{item.name}</span>
                     <div className="flex gap-1 text-sm">
                       <span className="text-gray-500">Via</span>
-                      <span>{item.device}</span>
+                      <span className="text-black">{item.device}</span>
                     </div>
                   </div>
                 </div>
@@ -230,9 +226,9 @@ const Home: React.FC = () => {
                 </div>
               </section>
               {/* 底部条 */}
-              <div
+              <section
                 className={`${item.status === 'Draft' ? 'bg-[#a5a6b1]' : item.status === 'Active' ? 'bg-[#14bcf1]' : 'bg-[#fa4561]'} absolute bottom-0 left-0 h-2 w-full rounded-b-2xl`}
-              ></div>
+              ></section>
             </div>
           ))}
         </main>
