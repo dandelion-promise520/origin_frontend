@@ -3,6 +3,7 @@ import { getProduct } from '@renderer/api/product'
 import { Product } from '@renderer/types'
 import { Button, ConfigProvider, Input, Radio } from 'antd'
 import React, { useState } from 'react'
+import './style.css'
 
 const Title: React.FC<{
   setTableValue?: React.Dispatch<React.SetStateAction<Product[]>>
@@ -35,12 +36,13 @@ const Title: React.FC<{
       {/* 上半部分 */}
       <header className="flex w-full justify-between">
         {/* 左侧部分 */}
-        <section className="flex gap-4">
+        <section className="center gap-4">
           <span className="flex items-center justify-center text-xl font-bold select-none">
             Rent Order
           </span>
 
-          <div className="h-full rounded-full border border-gray-300"></div>
+          {/* 分割线 */}
+          <div className="h-8 rounded-full border border-gray-300"></div>
 
           <div className="flex gap-3">
             <Button className="no-drag" color="default" variant="solid" size="large">

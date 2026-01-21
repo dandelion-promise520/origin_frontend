@@ -1,0 +1,20 @@
+@reference "../../assets/main.css";
+/* 菜单部分 */
+#menu {
+  a {
+    @apply flex items-center justify-center rounded-md px-4 py-2;
+
+    span {
+      @apply text-gray-400;
+    }
+
+    &:hover,
+    &.active {
+      @apply bg-gray-200;
+
+      span {
+        @apply text-black;
+      }
+    }
+  }
+}

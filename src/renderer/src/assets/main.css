@@ -14,40 +14,6 @@
   @apply flex items-center justify-center;
 }
 
-/* 菜单部分 */
-#menu {
-  a {
-    @apply flex items-center justify-center rounded-md px-4 py-2;
-
-    span {
-      @apply text-gray-400;
-    }
-
-    &:hover,
-    &.active {
-      @apply bg-gray-200;
-
-      span {
-        @apply text-black;
-      }
-    }
-  }
-}
-
-/* 标题按钮组 */
-#button-group {
-  .base {
-    @apply border-2 font-semibold transition-all duration-300;
-    &:hover {
-      @apply border-2 border-black text-black;
-    }
-  }
-
-  .checked {
-    @apply border-2 border-black text-black;
-  }
-}
-
 /* 进度条 */
 .progress {
   @apply relative flex overflow-visible before:absolute before:top-1/2 before:right-full before:z-10 before:translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:border-6 before:border-black before:bg-white before:p-0.75 before:content-[""] after:absolute after:inset-auto after:top-1/2 after:left-full after:z-10 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border-6 after:border-[#7a808d] after:bg-white after:p-0.75 after:content-[""];

@@ -1,0 +1,14 @@
+@reference "../../assets/main.css";
+/* 标题按钮组 */
+#button-group {
+  .base {
+    @apply border-2 font-semibold transition-all duration-300;
+    &:hover {
+      @apply border-2 border-black text-black;
+    }
+  }
+
+  .checked {
+    @apply border-2 border-black text-black;
+  }
+}
