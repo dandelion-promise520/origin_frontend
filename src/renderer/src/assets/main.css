@@ -1,6 +1,5 @@
 @import './base.css';
 @import 'tailwindcss';
-@plugin '@iconify/tailwind4';
 
 .drag {
   app-region: drag;
@@ -14,15 +13,8 @@
   @apply flex items-center justify-center;
 }
 
-/* 进度条 */
-.progress {
-  @apply relative flex overflow-visible before:absolute before:top-1/2 before:right-full before:z-10 before:translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:border-6 before:border-black before:bg-white before:p-0.75 before:content-[""] after:absolute after:inset-auto after:top-1/2 after:left-full after:z-10 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:border-6 after:border-[#7a808d] after:bg-white after:p-0.75 after:content-[""];
-
-  &.over-time {
-    @apply after:border-[#fa4662];
-  }
-
-  &.draft {
-    @apply before:border-[#7a808d];
+#cus-sider {
+  .ant-layout-sider-children {
+    @apply flex flex-col;
   }
 }

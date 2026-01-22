@@ -1,7 +1,9 @@
 import React from 'react'
 import Title from '../../components/Title'
 import { dataInter } from './types'
-import { Avatar, Progress, ProgressProps } from 'antd'
+import { Avatar, Button, Progress, ProgressProps } from 'antd'
+import { DraftIcon, ExclamationIcon, LightningIcon } from '@renderer/components/Icon'
+import { RightOutlined } from '@ant-design/icons'
 
 const Home: React.FC = () => {
   // 卡片数据信息
@@ -173,9 +175,13 @@ const Home: React.FC = () => {
                 {/* 分割线 */}
                 <span className="h-4 rounded-full border border-gray-300"></span>
                 {/* 图标 */}
-                <span
-                  className={`text-2xl ${item.status === 'Draft' ? 'icon-[material-symbols--draft] text-gray-500' : item.status === 'Active' ? 'icon-[basil--lightning-alt-solid] text-blue-400' : 'icon-[majesticons--exclamation] text-red-400'}`}
-                />
+                {item.status === 'Draft' ? (
+                  <DraftIcon />
+                ) : item.status === 'Active' ? (
+                  <LightningIcon />
+                ) : (
+                  <ExclamationIcon />
+                )}
                 {/* 状态 */}
                 <span className="text-md font-medium text-gray-500">{item.status}</span>
               </section>
@@ -210,20 +216,16 @@ const Home: React.FC = () => {
                       .map((word) => word[0].toUpperCase())
                       .join('')}
                   </Avatar>
-                  <div className="flex flex-col">
+                  <section className="flex flex-col">
                     <span className="font-bold text-black">{item.name}</span>
                     <div className="flex gap-1 text-sm">
                       <span className="text-gray-500">Via</span>
                       <span className="text-black">{item.device}</span>
                     </div>
-                  </div>
+                  </section>
                 </div>
                 {/* 按钮部分 */}
-                <div>
-                  <div className="flex size-8 cursor-pointer items-center justify-center rounded-full bg-black">
-                    <span className="icon-[material-symbols--arrow-forward-ios] text-white" />
-                  </div>
-                </div>
+                <Button color="default" variant="solid" shape="circle" icon={<RightOutlined />} />
               </section>
               {/* 底部条 */}
               <section

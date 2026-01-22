@@ -2,7 +2,7 @@ import { getProduct } from '@renderer/api/product'
 import React, { useEffect, useState } from 'react'
 import Title from '@renderer/components/Title'
 import { Product } from '@renderer/types'
-import { Table } from 'antd'
+import { ConfigProvider, Table } from 'antd'
 
 const Schedule: React.FC = () => {
   const [dataSource, setDataSource] = useState<Product[]>([])
@@ -46,16 +46,27 @@ const Schedule: React.FC = () => {
 
   return (
     <div className="flex h-full w-full flex-col">
-      <Title setTableValue={setDataSource} />
+      <Title setTableValue={setDataSource} setLoading={setLoading} />
       {/* 内容部分 */}
       <div className="p-4">
-        <Table
-          bordered
-          pagination={false}
-          loading={loading}
-          dataSource={dataSource}
-          columns={columns}
-        ></Table>
+        <ConfigProvider
+          theme={{
+            components: {
+              Table: {
+                borderColor: '#cfcfcf'
+              }
+            }
+          }}
+        >
+          <Table
+            bordered
+            pagination={false}
+            loading={loading}
+            dataSource={dataSource}
+            columns={columns}
+            rowClassName={(_, index) => (index % 2 === 0 ? 'bg-gray-100' : '')}
+          ></Table>
+        </ConfigProvider>
       </div>
     </div>
   )

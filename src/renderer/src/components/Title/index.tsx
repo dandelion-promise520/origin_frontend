@@ -3,10 +3,12 @@ import { Product } from '@renderer/types'
 import { Button, ConfigProvider, Input, Radio } from 'antd'
 import React, { useState } from 'react'
 import './style.css'
+import { DownloadOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 
 const Title: React.FC<{
   setTableValue?: React.Dispatch<React.SetStateAction<Product[]>>
-}> = ({ setTableValue }) => {
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>
+}> = ({ setTableValue, setLoading }) => {
   const [inputValue, setInputValue] = useState<string>('')
 
   // 处理输入框变化
@@ -18,9 +20,12 @@ const Title: React.FC<{
   const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>): Promise<void> => {
     if (event.key === 'Enter') {
       setInputValue('')
+      if (!setLoading) return
+      setLoading(true)
 
       if (setTableValue) {
         const res = await getProduct(inputValue)
+        setLoading(false)
         setTableValue(res.data)
       }
     }
@@ -44,13 +49,17 @@ const Title: React.FC<{
           <div className="h-8 rounded-full border border-gray-300"></div>
 
           <div className="flex gap-3">
-            <Button className="no-drag" color="default" variant="solid" size="large">
-              <span className="icon-[mdi--plus] size-6" />
+            <Button
+              className="no-drag"
+              icon={<PlusOutlined />}
+              color="default"
+              variant="solid"
+              size="large"
+            >
               <span className="font-semibold">Add Order</span>
             </Button>
 
-            <Button className="no-drag" size="large">
-              <span className="icon-[material-symbols--download] size-6" />
+            <Button className="no-drag" icon={<DownloadOutlined />} size="large">
               <span className="font-semibold">Export</span>
             </Button>
           </div>
@@ -98,7 +107,7 @@ const Title: React.FC<{
           }}
           className="no-drag"
           placeholder="请输入您想搜索的产品"
-          prefix={<span className="icon-[mingcute--search-line]" />}
+          prefix={<SearchOutlined />}
           value={inputValue}
           onChange={handleChange}
           onKeyUp={handleKeyDown}
