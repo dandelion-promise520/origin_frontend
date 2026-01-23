@@ -14,7 +14,7 @@ function createWindow(): void {
     titleBarStyle: 'hidden',
     ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {}),
     titleBarOverlay: {
-      color: '#ffffff',
+      color: '#f5f5f5',
       symbolColor: '#000000'
     },
     ...(process.platform === 'linux' ? { icon } : {}),

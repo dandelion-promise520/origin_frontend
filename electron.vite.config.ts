@@ -39,7 +39,8 @@ export default defineConfig({
         '/api': {
           // target: 'http://192.168.1.242:8000',
           // target: 'http://127.0.0.1:3000',
-          target: 'https://elysia.ljflovezxm.cn',
+          // target: 'https://elysia.ljflovezxm.cn',
+          target: 'http://haruta.top:8000',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }

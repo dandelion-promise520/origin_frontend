@@ -4,20 +4,20 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createHashRouter, RouterProvider } from 'react-router'
 import App from './App'
-import home from './pages/home/home'
-import schedule from './pages/schedule/schedule'
-import members from './pages/members/members'
-import dashboard from './pages/dashboard/dashboard'
+import schedule from './pages/Schedule'
+import { ExpiryBoard } from './pages/ExpiryBoard'
+import { InventoryManagement } from './pages/InventoryManagement'
+import { ChartAnalysis } from './pages/ChartAnalysis'
 
 const router = createHashRouter([
   {
     path: '/',
     Component: App,
     children: [
-      { index: true, Component: home },
       { path: 'schedule', Component: schedule },
-      { path: 'members', Component: members },
-      { path: 'dashboard', Component: dashboard }
+      { path: 'ExpiryBoard', Component: ExpiryBoard },
+      { index: true, Component: InventoryManagement },
+      { path: 'ChartAnalysis', Component: ChartAnalysis }
     ]
   }
 ])

@@ -1,9 +1,9 @@
 import React from 'react'
 import Title from '../../components/Title'
-import { dataInter } from './types'
 import { Avatar, Button, Progress, ProgressProps } from 'antd'
 import { DraftIcon, ExclamationIcon, LightningIcon } from '@renderer/components/Icon'
 import { RightOutlined } from '@ant-design/icons'
+import { dataInter } from './types'
 
 const Home: React.FC = () => {
   // 卡片数据信息
