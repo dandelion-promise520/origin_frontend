@@ -2,7 +2,7 @@ import { getProduct, Product } from '@renderer/api/product'
 import { ConfigProvider, Table } from 'antd'
 import { JSX, useEffect, useState } from 'react'
 
-const Schedule = (): JSX.Element => {
+export const Schedule = (): JSX.Element => {
   const [dataSource, setDataSource] = useState<Product[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -68,5 +68,3 @@ const Schedule = (): JSX.Element => {
     </div>
   )
 }
-
-export default Schedule

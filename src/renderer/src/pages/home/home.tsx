@@ -5,7 +5,7 @@ import { JSX } from 'react'
 
 import { dataInter } from './types'
 
-const Home = (): JSX.Element => {
+export const Home = (): JSX.Element => {
   // 卡片数据信息
   const data: dataInter[] = [
     {
@@ -244,5 +244,3 @@ const Home = (): JSX.Element => {
     </div>
   )
 }
-
-export default Home
