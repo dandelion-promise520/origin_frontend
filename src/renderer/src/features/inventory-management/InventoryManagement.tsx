@@ -69,7 +69,7 @@ export const InventoryManagement = (): JSX.Element => {
   ]
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 rounded-xl bg-white p-4">
       <header className="flex items-center justify-between">
         <Button icon={<PlusOutlined />} type="primary">
           新增货物
