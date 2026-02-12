@@ -1,5 +1,5 @@
 import { BellOutlined, UserOutlined } from '@ant-design/icons'
-import { theme } from 'antd'
+import { Button, theme } from 'antd'
 import { Header } from 'antd/es/layout/layout'
 import { JSX, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
@@ -24,7 +24,7 @@ export const AppHeader = (): JSX.Element => {
       style={{
         height: 'auto',
         padding: 0,
-        margin: '30px 24px 0 24px',
+        margin: '36px 24px 0 24px',
         background: colorBgLayout
       }}
       className="flex flex-col justify-center gap-4"
@@ -32,9 +32,9 @@ export const AppHeader = (): JSX.Element => {
       {/* 基础头部区域 */}
       <section className="flex items-center justify-between">
         <span className="text-4xl font-bold select-none">{header}</span>
-        <div className="center gap-4">
-          <BellOutlined className="no-drag text-4xl" />
-          <UserOutlined className="no-drag text-4xl" />
+        <div className="center no-drag gap-2">
+          <Button type="default" size="large" icon={<BellOutlined />} />
+          <Button type="default" size="large" icon={<UserOutlined />} />
         </div>
       </section>
     </Header>

@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://haruta.top:8000/:path*"
+      "destination": "https://haruta.top:8000/:path*"
     }
   ]
 }
