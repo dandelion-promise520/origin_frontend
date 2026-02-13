@@ -1,10 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "out/renderer",
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://haruta.top:8000/:path*"
-    }
-  ]
+  "outputDirectory": "out/renderer"
 }
