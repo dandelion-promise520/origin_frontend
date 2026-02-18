@@ -5,18 +5,9 @@
     <title>Origin</title>
     <link rel="icon" href="./src/assets/electron.svg" />
     <!-- 安全策略，生产环境请打开 -->
-    <!-- <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" /> -->
-
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self';
-               script-src 'self' 'unsafe-inline' 'unsafe-eval';
-               connect-src 'self' http://localhost:5678 ws:
-                           http://haruta.top https://haruta.top
-                           http://localhost:3000 https://localhost:3000;
-               img-src 'self' data: https:;
-               style-src 'self' 'unsafe-inline'"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
     />
   </head>
 

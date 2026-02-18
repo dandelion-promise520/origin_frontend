@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const instance = axios.create({
-  baseURL: import.meta.env.RENDERER_VITE_API_BASE_URL || '/api',
+  baseURL: '/api',
   timeout: 3000,
   headers: { 'X-Custom-Header': 'foobar' }
 })
