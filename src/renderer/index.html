@@ -8,19 +8,12 @@
     <!-- <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:" /> -->
 
-    <!-- 暂时关闭策略以使用code-inspector,开发环境下使用 -->
-    <!-- <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: http://localhost:5678;
-                   connect-src 'self' http://localhost:5678 ws:;
-                   img-src 'self' data: http://localhost:5678;"
-    /> -->
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self';
                script-src 'self' 'unsafe-inline' 'unsafe-eval';
                connect-src 'self' http://localhost:5678 ws:
-                           http://haruta.top:8000 https://haruta.top:8000
+                           http://haruta.top https://haruta.top
                            http://localhost:3000 https://localhost:3000;
                img-src 'self' data: https:;
                style-src 'self' 'unsafe-inline'"
