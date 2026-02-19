@@ -1,10 +1,29 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "singleQuote": true,
+  "extends": ["oxlint:recommended", "oxlint:react", "oxlint:typescript"],
   "semi": false,
   "printWidth": 100,
   "trailingComma": "none",
   "experimentalTailwindcss": {},
+  "rules": {
+    // React
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "react/prop-types": "off",
+
+    // Hooks
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    // TypeScript
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+
+    // 通用
+    "no-console": "warn",
+    "no-debugger": "error"
+  },
   "ignorePatterns": [
     "out",
     "dist",

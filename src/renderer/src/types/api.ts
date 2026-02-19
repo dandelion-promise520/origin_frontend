@@ -1,5 +1,5 @@
-export interface ApiResponse<T> {
-  success?: boolean
+export type ApiResponse<T> = {
+  code: number
+  message: string
   data: T
-  error?: string
 }

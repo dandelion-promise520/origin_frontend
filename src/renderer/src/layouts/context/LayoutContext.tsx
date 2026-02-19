@@ -1,4 +1,12 @@
-import { createContext, useContext, useRef } from 'react'
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useContext,
+  useRef,
+  useState
+} from 'react'
 
 interface LayoutContextType {
   /**
@@ -11,6 +19,10 @@ interface LayoutContextType {
    * @example const node = getRef('myElement')
    */
   getRef: (key: string) => HTMLElement | null
+  /** 当前页面标题（由侧栏或路由更新） */
+  header: string
+  /** 设置 header 的方法，供子组件调用 */
+  setHeader: Dispatch<SetStateAction<string>>
 }
 
 const LayoutContext = createContext<LayoutContextType | null>(null)
@@ -25,6 +37,7 @@ export const useLayoutContext = (): LayoutContextType => {
 
 export const LayoutProvider = ({ children }: { children: React.ReactNode }): React.JSX.Element => {
   const refs = useRef<Map<string, HTMLElement | null>>(new Map())
+  const [header, setHeader] = useState<string>('')
 
   const registerRef = (key: string, node: HTMLElement | null): void => {
     if (node) {
@@ -33,9 +46,13 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }): Rea
       refs.current.delete(key)
     }
   }
-  const getRef = (key: string): HTMLElement | null => {
+  const getRef = useCallback((key: string): HTMLElement | null => {
     return refs.current.get(key) || null
-  }
+  }, [])
 
-  return <LayoutContext.Provider value={{ registerRef, getRef }}>{children}</LayoutContext.Provider>
+  return (
+    <LayoutContext.Provider value={{ registerRef, getRef, header, setHeader }}>
+      {children}
+    </LayoutContext.Provider>
+  )
 }

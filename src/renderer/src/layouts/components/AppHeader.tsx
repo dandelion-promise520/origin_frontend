@@ -1,23 +1,16 @@
 import { BellOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, theme } from 'antd'
 import { Header } from 'antd/es/layout/layout'
-import { JSX, useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
+import { JSX } from 'react'
 
-import { menuConfig } from '../config'
+import { useLayoutContext } from '../context/LayoutContext'
 
 export const AppHeader = (): JSX.Element => {
   const {
     token: { colorBgLayout }
   } = theme.useToken()
 
-  const location = useLocation()
-
-  const [header, setHeader] = useState<string>('')
-
-  useEffect(() => {
-    setHeader(menuConfig.find((item) => item.key === location.pathname)?.label || '')
-  }, [location.pathname])
+  const { header } = useLayoutContext()
 
   return (
     <Header

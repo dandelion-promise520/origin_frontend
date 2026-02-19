@@ -1,8 +1,9 @@
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { getProduct } from '@renderer/features/product'
 import { useQuery } from '@tanstack/react-query'
 import { Button, ConfigProvider, Form, Input, Select, Table } from 'antd'
 import { JSX, useState } from 'react'
+
+import { getProduct } from '../expiry-board'
 
 export const InventoryManagement = (): JSX.Element => {
   // 请求逻辑层
@@ -115,7 +116,7 @@ export const InventoryManagement = (): JSX.Element => {
               loading={isPending}
               dataSource={data?.data}
               columns={columns}
-              rowClassName={(_, index) => (index % 2 === 0 ? 'bg-gray-100' : '')}
+              rowClassName={(_, index) => (index % 2 === 0 ? 'bg-[#f5f5f5]' : '')}
             />
           )}
         </ConfigProvider>

@@ -1,5 +1,4 @@
 import { AppstoreOutlined, CalendarOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
-import { getProduct } from '@renderer/features/product'
 import { useQuery } from '@tanstack/react-query'
 import {
   Button,
@@ -13,6 +12,8 @@ import {
   Table
 } from 'antd'
 import { JSX, useState } from 'react'
+
+import { getProduct } from './api'
 
 export const ExpiryBoard = (): JSX.Element => {
   const onChange = (e: RadioChangeEvent): void => {

@@ -1,12 +1,12 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined } from '@ant-design/icons'
 import { Button, Menu } from 'antd'
 import Sider from 'antd/es/layout/Sider'
-import gsap from 'gsap'
 import { JSX, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
 import { menuConfig } from '../config/menuConfig'
 import { useLayoutContext } from '../context/LayoutContext'
+import { useRouterAnimation } from '../hooks'
 
 const menuItems = menuConfig.map((item) => ({
   key: item.key,
@@ -20,8 +20,10 @@ export const AppSider = (): JSX.Element => {
 
   const location = useLocation()
   const navigate = useNavigate()
+  const { slider } = useRouterAnimation()
 
-  const handleSelect = ({ key }: { key: string }): void => {
+  // main内容动画
+  const mainAnimation = (key: string): void => {
     const contentRef = getRef('content')
 
     if (!contentRef) {
@@ -29,27 +31,11 @@ export const AppSider = (): JSX.Element => {
       return
     }
 
-    gsap.to(contentRef, {
-      duration: 0.4,
-      opacity: 0,
-      x: 50,
-      ease: 'cubic-bezier(0.4, 0, 0.2, 1)',
-      onComplete: () => {
-        navigate(key)
+    slider({ AnimationRef: contentRef, navigateTo: key })
+  }
 
-        gsap.set(contentRef, {
-          opacity: 0,
-          x: -50
-        })
-
-        gsap.to(contentRef, {
-          duration: 0.4,
-          opacity: 1,
-          x: 0,
-          ease: 'cubic-bezier(0.4, 0, 0.2, 1)'
-        })
-      }
-    })
+  const handleSelect = ({ key }: { key: string }): void => {
+    mainAnimation(key)
   }
 
   return (
