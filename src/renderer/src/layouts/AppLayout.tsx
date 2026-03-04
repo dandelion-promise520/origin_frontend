@@ -4,19 +4,16 @@ import { useLocation } from 'react-router'
 
 import { AppContent, AppHeader, AppSider } from './components'
 import { menuConfig } from './config'
-import { useLayoutContext } from './context'
+import { LayoutProvider, useLayoutContext } from './context'
 
-export const MainLayout = (): JSX.Element => {
+const AppLayoutContent = (): JSX.Element => {
   const location = useLocation()
   const { setHeader } = useLayoutContext()
 
-  // 路由变化时触发
   useEffect(() => {
     const menu = menuConfig.find((item) => item.key === location.pathname)
-
     const label = menu?.label || ''
 
-    // 标题改变
     setHeader(label)
   }, [location.pathname, setHeader])
 
@@ -29,5 +26,13 @@ export const MainLayout = (): JSX.Element => {
         <AppContent />
       </Layout>
     </Layout>
+  )
+}
+
+export const AppLayout = (): JSX.Element => {
+  return (
+    <LayoutProvider>
+      <AppLayoutContent />
+    </LayoutProvider>
   )
 }
