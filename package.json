@@ -37,6 +37,8 @@
     "antd": "^6.2.1",
     "axios": "^1.13.2",
     "clsx": "^2.1.1",
+    "commitizen": "^4.3.1",
+    "cz-git": "^1.12.0",
     "electron-updater": "^6.3.9",
     "gsap": "^3.14.2",
     "react-router": "^7.9.6",
