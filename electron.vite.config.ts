@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
         cors: true,
         proxy: {
           '/api': {
-            target: 'http://haruta.top',
+            target: 'https://haruta.top',
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/api/, '')
           }

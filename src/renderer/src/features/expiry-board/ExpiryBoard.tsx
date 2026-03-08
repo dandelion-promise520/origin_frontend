@@ -1,30 +1,71 @@
 import { AppstoreOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { useQuery } from '@tanstack/react-query'
 import { Button, Form, Input, Radio, Select } from 'antd'
-import { JSX, useState } from 'react'
+import { JSX, useCallback, useEffect, useState } from 'react'
 
-import { getProduct } from './api'
+import { getProduct, Product } from './api'
 import { CardView } from './components/CardView'
 import { HeaderCard } from './components/HeaderCard'
 import { TableView } from './components/TableView'
 
 export const ExpiryBoard = (): JSX.Element => {
+  // 搜索框
   const [searchValue, setSearchValue] = useState('')
+  // 视图
   const [view, setView] = useState<'table' | 'card'>('table')
+  // 搜索框实例
   const [form] = Form.useForm()
 
+  // 搜索函数
   const handleSearch = (formData: { search: string }): void => {
     form.resetFields()
     setSearchValue(formData.search)
   }
 
+  // 产品数据
+  const [productData, setProductData] = useState<Product[]>([])
+
+  // 请求数据
   const { data, isPending, error } = useQuery({
     queryKey: ['productData', searchValue],
     queryFn: async () => {
       const res = await getProduct(searchValue)
+      setProductData(res.data)
       return res.data
     }
   })
+
+  // 下拉框
+  const [selectData, setSelectData] = useState<
+    {
+      value: number
+      label: string
+    }[]
+  >([])
+
+  // 监听data变化，变化时更新下拉框的值
+  useEffect(() => {
+    // Array.from将Set变为真正数组
+    // 用map提取类型并用new Set令原数组去重
+    // filter(Boolean)则是过滤假值，如null undefined等
+    const res = Array.from(new Set(data?.map((item) => item.category).filter(Boolean))).map(
+      (item, index) => {
+        return { value: index, label: item }
+      }
+    )
+    setSelectData(res)
+  }, [data])
+
+  // 下拉框选择函数
+  const handleSelect = useCallback(
+    (_, { label }): void => {
+      const res = data?.filter((item) => item.category === label)
+      if (res) {
+        setProductData(res)
+      }
+    },
+    [data]
+  )
 
   return (
     <div className="flex flex-col gap-4">
@@ -62,9 +103,8 @@ export const ExpiryBoard = (): JSX.Element => {
               style={{ minWidth: 200 }}
               showSearch
               placeholder="全部状态"
-              options={data?.map((item) => {
-                return { value: item.id, label: item.product_name }
-              })}
+              options={selectData}
+              onSelect={handleSelect}
             />
           </section>
 
@@ -75,7 +115,7 @@ export const ExpiryBoard = (): JSX.Element => {
 
         <main>
           {view === 'table' ? (
-            <TableView data={data} error={error} isPending={isPending} />
+            <TableView data={productData} error={error} isPending={isPending} />
           ) : (
             <CardView />
           )}
