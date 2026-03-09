@@ -1,14 +1,14 @@
 import { ModalProps } from 'antd'
 
-export interface AddBatchesModalProps extends ModalProps {
+export interface AddGoodsModalProps extends ModalProps {
   setIsModalOpen: (open: boolean) => void
 }
 
 export interface FieldType {
-  batch_name?: string
+  product_name?: string
   barcode?: string
   shelf_life_days?: string
   manufacturer?: string
   location?: string
-  quantity?: number
+  unit?: string
 }

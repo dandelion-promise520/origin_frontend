@@ -1,10 +1,10 @@
-import { ModalForm } from '@renderer/components/modal-form/ModalForm'
+import { ModalForm } from '@renderer/components'
 import { Button, Form, FormProps, Input } from 'antd'
 import { JSX } from 'react'
 
-import { AddBatchesModalProps, FieldType } from './types'
+import { batchesDetailsModalProps, FieldType } from './types'
 
-export const AddBatchesModal = (props: AddBatchesModalProps): JSX.Element => {
+export const BatchesDetailsModal = (props: batchesDetailsModalProps): JSX.Element => {
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     console.log('Success:', values)
     props.setIsModalOpen(false)
@@ -15,7 +15,7 @@ export const AddBatchesModal = (props: AddBatchesModalProps): JSX.Element => {
   }
 
   return (
-    <ModalForm formProps={{ onFinish, onFinishFailed }} modalProps={props} modalTitle="新建批次">
+    <ModalForm formProps={{ onFinish, onFinishFailed }} modalProps={props} modalTitle="批次详情">
       <Form.Item<FieldType>
         label="名称"
         name="batch_name"
@@ -25,24 +25,32 @@ export const AddBatchesModal = (props: AddBatchesModalProps): JSX.Element => {
       </Form.Item>
 
       <Form.Item<FieldType>
-        label="商品条码"
-        name="barcode"
+        label="批次号"
+        name="batch_code"
         rules={[{ required: true, message: '请输入商品条码' }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item<FieldType>
-        label="保质期"
-        name="shelf_life_days"
+        label="类别"
+        name="category"
         rules={[{ required: true, message: '请输入保质期' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item<FieldType>
-        label="生产厂商"
-        name="manufacturer"
+        label="到期时间"
+        name="expire_date"
         rules={[{ required: true, message: '请输入生产厂商' }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label="状态"
+        name="status"
+        rules={[{ required: true, message: '请输入存储位置' }]}
       >
         <Input />
       </Form.Item>
@@ -50,6 +58,14 @@ export const AddBatchesModal = (props: AddBatchesModalProps): JSX.Element => {
       <Form.Item<FieldType>
         label="存储位置"
         name="location"
+        rules={[{ required: true, message: '请输入存储位置' }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label="生产厂商"
+        name="manufacturer"
         rules={[{ required: true, message: '请输入存储位置' }]}
       >
         <Input />
@@ -66,7 +82,7 @@ export const AddBatchesModal = (props: AddBatchesModalProps): JSX.Element => {
       <Form.Item label={null}>
         <div className="flex justify-end">
           <Button type="primary" htmlType="submit">
-            新建批次
+            删除
           </Button>
         </div>
       </Form.Item>

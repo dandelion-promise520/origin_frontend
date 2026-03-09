@@ -1,27 +1,65 @@
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { useQuery } from '@tanstack/react-query'
 import { Button, ConfigProvider, Form, Input, Select, Table } from 'antd'
-import { JSX, useState } from 'react'
+import { JSX, useCallback, useEffect, useState } from 'react'
 
-import { getProduct } from '../expiry-board/api'
+import { getProduct, Product } from './api'
+import { AddGoodsModal } from './components'
 
 export const InventoryManagement = (): JSX.Element => {
-  // 请求逻辑层
-
   // 搜索字段
   const [searchValue, setSearchValue] = useState('')
+
+  // 产品数据
+  const [productData, setProductData] = useState<Product[]>([])
 
   // 获取产品请求
   const { data, isPending, error } = useQuery({
     queryKey: ['productData', searchValue],
     queryFn: async () => {
       const res = await getProduct(searchValue)
-      return res
+      setProductData(res.data)
+      return res.data
     }
   })
 
-  // ui层
-  // 获取表单实例以使用表单方法
+  // 下拉框
+  const [selectData, setSelectData] = useState<
+    {
+      value: number
+      label: string
+    }[]
+  >([])
+
+  // 监听data变化，变化时更新下拉框的值
+  useEffect(() => {
+    if (!data || data.length === 0) return
+    // Array.from将Set变为真正数组
+    // 用map提取类型并用new Set令原数组去重
+    // filter(Boolean)则是过滤假值，如null undefined等
+    const res = Array.from(new Set(data.map((item) => item.category).filter(Boolean))).map(
+      (item, index) => {
+        return { value: index, label: item }
+      }
+    )
+    setSelectData(res)
+  }, [data])
+
+  // 下拉框选择函数
+  const handleSelect = useCallback(
+    (_, { label }): void => {
+      console.log(1)
+      const res = data?.filter((item) => item.category === label)
+      if (res) {
+        setProductData(res)
+      }
+    },
+    [data]
+  )
+
+  // 模态框
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const [form] = Form.useForm()
 
   // 搜索事件
@@ -70,57 +108,77 @@ export const InventoryManagement = (): JSX.Element => {
   ]
 
   return (
-    <div className="flex flex-col gap-4 rounded-xl bg-white p-4">
-      <header className="flex items-center justify-between">
-        <Button icon={<PlusOutlined />} type="primary">
-          新增货物
-        </Button>
-        <section className="flex gap-4">
-          <Form onFinish={handleSearch} form={form}>
-            <Form.Item<{ search: string | number }> name="search" style={{ margin: 0 }}>
-              <Input placeholder="搜索产品..." prefix={<SearchOutlined />} />
-            </Form.Item>
-          </Form>
+    <>
+      <div className="flex flex-col gap-4 rounded-xl bg-white p-4">
+        <header className="flex items-center justify-between">
+          <section className="flex gap-4">
+            <Form onFinish={handleSearch} form={form}>
+              <Form.Item<{ search: string | number }> name="search" style={{ margin: 0 }}>
+                <Input placeholder="搜索产品..." prefix={<SearchOutlined />} />
+              </Form.Item>
+            </Form>
 
-          <Select
-            style={{ minWidth: 140 }}
-            showSearch={{
-              filterOption: (input, option) =>
-                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-            }}
-            placeholder="Select a person"
-            options={[
-              { value: '1', label: 'Jack' },
-              { value: '2', label: 'Lucy' },
-              { value: '3', label: 'Tom' }
-            ]}
-          />
-        </section>
-      </header>
-      <main>
-        <ConfigProvider
-          theme={{
-            components: {
-              Table: {
-                borderColor: '#cfcfcf'
-              }
-            }
-          }}
-        >
-          {error ? (
-            <div>请求数据出错：{error.message}</div>
-          ) : (
-            <Table
-              className="test"
-              bordered
-              loading={isPending}
-              dataSource={data?.data}
-              columns={columns}
-              rowClassName={(_, index) => (index % 2 === 0 ? 'bg-[#f5f5f5]' : '')}
+            <Select
+              style={{ minWidth: 140 }}
+              showSearch={{
+                filterOption: (input, option) =>
+                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+              }}
+              placeholder="类别筛选"
+              allowClear
+              onClear={() => {
+                if (data) {
+                  setProductData(data)
+                }
+              }}
+              onSelect={handleSelect}
+              options={selectData}
             />
-          )}
-        </ConfigProvider>
-      </main>
-    </div>
+          </section>
+
+          <Button
+            icon={<PlusOutlined />}
+            type="primary"
+            onClick={() => {
+              setIsModalOpen(true)
+            }}
+          >
+            新增货物
+          </Button>
+        </header>
+        <main>
+          <ConfigProvider
+            theme={{
+              components: {
+                Table: {
+                  borderColor: '#cfcfcf'
+                }
+              }
+            }}
+          >
+            {error ? (
+              <div>请求数据出错：{error.message}</div>
+            ) : (
+              <Table
+                className="test"
+                bordered
+                loading={isPending}
+                dataSource={productData}
+                columns={columns}
+                rowClassName={(_, index) => (index % 2 === 0 ? 'bg-[#f5f5f5]' : '')}
+              />
+            )}
+          </ConfigProvider>
+        </main>
+      </div>
+
+      <AddGoodsModal
+        open={isModalOpen}
+        onCancel={() => {
+          setIsModalOpen(false)
+        }}
+        setIsModalOpen={setIsModalOpen}
+      />
+    </>
   )
 }

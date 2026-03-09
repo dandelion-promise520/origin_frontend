@@ -146,7 +146,8 @@ export const ExpiryBoard = (): JSX.Element => {
         onCancel={() => {
           setIsModalOpen(false)
         }}
-      />
+        setIsModalOpen={setIsModalOpen}
+      ></AddBatchesModal>
     </>
   )
 }
