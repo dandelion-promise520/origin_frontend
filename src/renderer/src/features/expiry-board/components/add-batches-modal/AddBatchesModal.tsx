@@ -1,4 +1,4 @@
-import { ModalForm } from '@renderer/components/modal-form/ModalForm'
+import { ModalForm } from '@renderer/components'
 import { Button, Form, FormProps, Input } from 'antd'
 import { JSX } from 'react'
 
