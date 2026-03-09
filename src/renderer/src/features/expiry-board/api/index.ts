@@ -1,2 +1,2 @@
-export * from './product'
-export * from './types'
+export * from './product/product'
+export * from './product/types'

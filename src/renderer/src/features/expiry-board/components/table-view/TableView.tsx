@@ -1,7 +1,7 @@
 import { Button, ConfigProvider, Table } from 'antd'
 import { JSX } from 'react'
 
-import { TableViewProps } from '../types'
+import { TableViewProps } from './types'
 
 export const TableView = ({ error, isPending, data }: TableViewProps): JSX.Element => {
   const columns = [

@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Button, ConfigProvider, Form, Input, Select, Table } from 'antd'
 import { JSX, useState } from 'react'
 
-import { getProduct } from '../expiry-board'
+import { getProduct } from '../expiry-board/api'
 
 export const InventoryManagement = (): JSX.Element => {
   // 请求逻辑层

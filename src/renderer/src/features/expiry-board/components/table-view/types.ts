@@ -1,6 +1,6 @@
 import { UseQueryResult } from '@tanstack/react-query'
 
-import { Product } from '../api/types'
+import { Product } from '../../api/product/types'
 
 export type ProductQueryViewState = Pick<
   UseQueryResult<Product[], Error>,

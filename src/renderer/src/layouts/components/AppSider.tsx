@@ -5,37 +5,23 @@ import { JSX, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
 import { menuConfig } from '../config/menuConfig'
-import { useLayoutContext } from '../context/LayoutContext'
-import { useRouterAnimation } from '../hooks'
 
 const menuItems = menuConfig.map((item) => ({
   key: item.key,
   icon: <item.icon />,
-  label: item.label
+  label: item.label,
+  className: 'no-drag'
 }))
 
 export const AppSider = (): JSX.Element => {
   const [collapsed, setCollapsed] = useState(true)
-  const { getRef } = useLayoutContext()
 
   const location = useLocation()
   const navigate = useNavigate()
-  const { slider } = useRouterAnimation()
 
   // main内容动画
-  const mainAnimation = (key: string): void => {
-    const contentRef = getRef('content')
-
-    if (!contentRef) {
-      navigate(key)
-      return
-    }
-
-    slider({ AnimationRef: contentRef, navigateTo: key })
-  }
-
   const handleSelect = ({ key }: { key: string }): void => {
-    mainAnimation(key)
+    navigate(key)
   }
 
   return (
@@ -67,11 +53,11 @@ export const AppSider = (): JSX.Element => {
           onSelect={handleSelect}
           theme="light"
           mode="inline"
-          className="no-drag flex-1"
+          className="flex-1"
           items={menuItems}
         />
 
-        <Menu mode="inline" inlineCollapsed={collapsed} className="no-drag" selectable={false}>
+        <Menu mode="inline" className="no-drag" selectable={false}>
           <Menu.Item key="setting" icon={<SettingOutlined />}>
             设置
           </Menu.Item>

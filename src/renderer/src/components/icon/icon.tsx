@@ -1,8 +1,7 @@
 import Icon from '@ant-design/icons'
-import { GetProps } from 'antd'
 import { JSX } from 'react'
 
-type CustomIconComponentProps = GetProps<typeof Icon>
+import { CustomIconComponentProps } from './types'
 
 // 草稿图标
 const DraftIcon = (props: Partial<CustomIconComponentProps>): JSX.Element => (
@@ -59,4 +58,4 @@ const ExclamationIcon = (props: Partial<CustomIconComponentProps>): JSX.Element 
   />
 )
 
-export { ExclamationIcon, LightningIcon, DraftIcon }
+export { DraftIcon, ExclamationIcon, LightningIcon }

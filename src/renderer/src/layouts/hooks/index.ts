@@ -1,1 +1,1 @@
-export { useRouterAnimation } from './useRouterAnimation'
+export { useRouterAnimation } from './use-router-animation/useRouterAnimation'
